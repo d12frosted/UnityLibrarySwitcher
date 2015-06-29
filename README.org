@@ -1,0 +1,51 @@
+#+TITLE: Unity Library Switcher
+#+AUTHOR: Boris Buliga <d12frosted@icloud.com>
+
+Unity Library Switcher is a Unity3d plugin for switching build targets and git branches without the burden of assets reimporting.
+
+* Install
+
+To install the plugin just copy =UnityLibrarySwitcher= folder to your project assets folder.
+
+* How it works
+
+You have two actions:
+
+1. switch build target
+2. switch git branch
+
+Both actions are available from the plugin window, which is accessible from =Window/Library Switcher= menu. 
+
+[[file:images/screenshot1.png]]
+
+=Library= folder is cached for every =(branch, target)= pair. When you perform any action, the plugin will cache =Library= folder for current =(branch, target)= pair and then replace =Library= folder by the cached library of selected =(branch, target)= pair if it exists. To make things work faster plugin copies =Library= folder only in case you are moving to the =(branch, target)= pair that wasn't cached before. If it was already cached, then plugin just moves directories around. All cached =Library= folders are stored in =LibrarySwitcherCache= folder in unity project root directory. =(branch, target)= pair's =Library= folder is stored at =LibrarySwitcherCache/branch/target=. 
+
+* Limitations
+
+- Due to the implementation details you should change build target or git branch only from the plugin window. Otherwise you will run into unnecessary imports.
+- Branch switching only works with locally existing branches.
+
+* Contributing
+
+Pull requests, feature requests are warmly welcome! 
+
+* Issues
+
+** Unsupported platforms
+
+In the =Select target= drop-down list there are all build targets, even those user can't switch to because of licence restrictions. I suggest to filter this list if it's possible.
+
+** Possible problems when editor fails to switch the target
+
+Target switch process can fail because of following reasons.
+
+1. User cancels the process.
+2. Target platform is not available for user due to licence etc.
+
+We can't swap library folder after switching the target, because this process leads to recompilation and reimporting. We can't foresee the failure of target switch, so in case of failure we should swap library back. 
+
+** Windows support
+
+Branch switching is not supported on Windows due to implementation details.
+
+** Add nice key binding to bring up plugin window
