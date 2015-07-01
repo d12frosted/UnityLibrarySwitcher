@@ -4,7 +4,7 @@ Unity Library Switcher is a Unity3d plugin for switching build targets and git b
 
 ** Install
 
-To install the plugin just copy =UnityLibrarySwitcher= folder to your project assets folder.
+To install the plugin just copy =UnityLibrarySwitcher= folder to your project assets folder. Just don't forget to add this folder to =.gitignore= file. 
 
 ** How it works
 
@@ -28,7 +28,7 @@ Both actions are available from the plugin window, which is accessible from =Win
 
 Pull requests, feature requests are warmly welcome! 
 
-** Issues
+** Issues / Tasks
 
 *** Unsupported platforms
 
@@ -47,4 +47,16 @@ We can't swap library folder after switching the target, because this process le
 
 Branch switching is not supported on Windows due to implementation details.
 
-*** Add nice key binding to bring up plugin window
+*** There is no nice key binding to bring up plugin window
+
+*** Show the list of cached libraries
+
+We should show the list of cached library folders. I am not sure how to visualize it - the overall design is a matter of change in future, but think about following points.
+
+**** Directory size calculation might be expensive, so implement very fast method or make it async.
+
+**** User might want to remove the cached library from this list.
+
+**** Show the date of cache creation, because sometimes it's critical to know in order to make switch as fast as possible
+
+For example, is some cases it's much cheaper in matter of time to switch branches first and only then target. Sometimes vice versa.
