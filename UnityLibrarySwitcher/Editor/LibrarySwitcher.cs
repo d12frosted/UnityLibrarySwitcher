@@ -118,12 +118,6 @@ namespace UnityLibrarySwitcher
 
             Git.SwitchBranchTo(branchTo);
 
-            var branchPath = BranchPath(CurrentBranchName);
-            if (!Directory.Exists(branchPath))
-            {
-                Directory.CreateDirectory(branchPath);
-            }
-
             var libraryPathFrom = LibraryPath(CurrentBranchName, CurrentBuildTarget);
             var libraryPathTo = LibraryPath(branchTo, CurrentBuildTarget);
             SwitchLibrary(libraryPathFrom, libraryPathTo);
@@ -132,6 +126,9 @@ namespace UnityLibrarySwitcher
 
         private void SwitchLibrary(string pathFrom, string pathTo)
         {
+            SafeCreateDirectory(LibraryCacheDirectory);
+            SafeCreateDirectory(BranchPath(CurrentBranchName));
+
             if (Directory.Exists(pathTo))
             {
                 FileUtil.MoveFileOrDirectory("Library", pathFrom);
@@ -147,6 +144,14 @@ namespace UnityLibrarySwitcher
         #endregion
 
         #region PATH HELPERS
+
+        private static void SafeCreateDirectory(string path)
+        {
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+        }
 
         private static string BranchPath(string branch)
         {
