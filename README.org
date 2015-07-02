@@ -30,33 +30,4 @@ Pull requests, feature requests are warmly welcome!
 
 ** Issues / Tasks
 
-*** Unsupported platforms
-
-In the =Select target= drop-down list there are all build targets, even those user can't switch to because of licence restrictions. I suggest to filter this list if it's possible.
-
-*** Possible problems when editor fails to switch the target
-
-Target switch process can fail because of following reasons.
-
-1. User cancels the process.
-2. Target platform is not available for user due to licence etc.
-
-We can't swap library folder after switching the target, because this process leads to recompilation and reimporting. We can't foresee the failure of target switch, so in case of failure we should swap library back. 
-
-*** Windows support
-
-Branch switching is not supported on Windows due to implementation details.
-
-*** There is no nice key binding to bring up plugin window
-
-*** Show the list of cached libraries
-
-We should show the list of cached library folders. I am not sure how to visualize it - the overall design is a matter of change in future, but think about following points.
-
-**** Directory size calculation might be expensive, so implement very fast method or make it async.
-
-**** User might want to remove the cached library from this list.
-
-**** Show the date of cache creation, because sometimes it's critical to know in order to make switch as fast as possible
-
-For example, is some cases it's much cheaper in matter of time to switch branches first and only then target. Sometimes vice versa.
+Please, see [[https://github.com/d12frosted/UnityLibrarySwitcher/issues][Issues]] section.
