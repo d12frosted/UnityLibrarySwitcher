@@ -57,9 +57,9 @@ namespace UnityLibrarySwitcher
                 EditorGUILayout.Separator();
                 EditorGUILayout.Separator();
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Branch", GUILayout.Width(widths[0]));
-                GUILayout.Label("Target", GUILayout.Width(widths[1]));
-                GUILayout.Label("Size", GUILayout.Width(widths[2]));
+                GUILayout.Label("Branch", EditorStyles.boldLabel, GUILayout.Width(widths[0]));
+                GUILayout.Label("Target", EditorStyles.boldLabel, GUILayout.Width(widths[1]));
+                GUILayout.Label("Size", EditorStyles.boldLabel, GUILayout.Width(widths[2]));
                 GUILayout.EndHorizontal();
             }
 
