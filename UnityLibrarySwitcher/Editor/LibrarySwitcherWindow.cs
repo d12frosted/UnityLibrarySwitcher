@@ -98,9 +98,8 @@ namespace UnityLibrarySwitcher
 
         public static long DirSize(string dirPath)
         {
-            // we don't care about existance of dirPath
-            // and don't care if dirPath is actually a file
-            // so just calculate the size!
+            if (!Directory.Exists(dirPath))
+                throw new Exception("Couldn't calculate directory size. Path doesn't exist: " + dirPath);
             return DirSize(new DirectoryInfo(dirPath));
         }
 
