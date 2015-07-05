@@ -9,13 +9,13 @@ namespace UnityLibrarySwitcher
 {
     public class LibrarySwitcher
     {
-        #region SETTINGS
+        #region Settings
 
         public static readonly string LibraryCacheDirectory = "LibrarySwitcherCache";
 
         #endregion
 
-        #region PUBLIC FIELDS AND PROPERTIES
+        #region Public fields and properties
 
         public string CurrentBranchName
         {
@@ -51,7 +51,7 @@ namespace UnityLibrarySwitcher
 
         #endregion
 
-        #region PRIVATE FILEDS AND PROPERTIES
+        #region Private fields and properties
 
         private string m_currentBranchName;
         private List<string> m_branches;
@@ -59,7 +59,7 @@ namespace UnityLibrarySwitcher
 
         #endregion
 
-        #region SETUP
+        #region Update values
 
         public void UpdateListOfBranches()
         {
@@ -143,7 +143,7 @@ namespace UnityLibrarySwitcher
 
         #endregion
 
-        #region PATH HELPERS
+        #region Path helpers
 
         private static void SafeCreateDirectory(string path)
         {
