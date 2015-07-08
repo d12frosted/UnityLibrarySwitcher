@@ -31,6 +31,16 @@ namespace UnityLibrarySwitcher
             window.titleContent.text = "Library Switcher";
         }
 
+        private void OnEnable()
+        {
+            _model.StartSizeCalculations();
+        }
+
+        private void OnDisable()
+        {
+            _model.StopSizeCalculations();
+        }
+
         private void OnGUI()
         {
             EditorGUILayout.Separator();
@@ -71,7 +81,8 @@ namespace UnityLibrarySwitcher
                     GUILayout.BeginHorizontal();
                     GUILayout.Label(v.Branch, GUILayout.Width(widths[0]));
                     GUILayout.Label(v.Target.ToString(), GUILayout.Width(widths[1]));
-                    GUILayout.Label("unknown size", GUILayout.Width(widths[2]));
+                    GUILayout.Label(v.Size == 0 ? "unknown size" : BytesToString(v.Size),
+                                    GUILayout.Width(widths[2]));
                     GUILayout.EndHorizontal();
                 }
             }
@@ -94,33 +105,5 @@ namespace UnityLibrarySwitcher
 
         #endregion
 
-        #region Size calculation
-
-        public static long DirSize(string dirPath)
-        {
-            if (!Directory.Exists(dirPath))
-                throw new Exception("Couldn't calculate directory size. Path doesn't exist: " + dirPath);
-            return DirSize(new DirectoryInfo(dirPath));
-        }
-
-        public static long DirSize(DirectoryInfo d)
-        {
-            long Size = 0;
-            // Add file sizes.
-            FileInfo[] fis = d.GetFiles();
-            foreach (FileInfo fi in fis)
-            {
-                Size += fi.Length;
-            }
-            // Add subdirectory sizes.
-            DirectoryInfo[] dis = d.GetDirectories();
-            foreach (DirectoryInfo di in dis)
-            {
-                Size += DirSize(di);
-            }
-            return(Size);
-        }
-
-        #endregion
     }
 }

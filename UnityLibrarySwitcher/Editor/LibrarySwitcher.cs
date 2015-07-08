@@ -87,7 +87,8 @@ namespace UnityLibrarySwitcher
                     else
                     {
                         var target = (BuildTarget) Enum.Parse(typeof(BuildTarget), targetInfo.Name);
-                        list.Add(new CachedLibraryInfo(branchInfo.Name, target));
+                        var path = LibraryPath(branchInfo.Name, target);
+                        list.Add(new CachedLibraryInfo(branchInfo.Name, target, path));
                     }
                 }
                 m_cachedLibraries.Add(branchInfo.Name, list);
@@ -96,7 +97,7 @@ namespace UnityLibrarySwitcher
 
         #endregion
 
-        #region SWITCH METHODS
+        #region Switch methods
 
         public void SwitchTargetTo(BuildTarget targetTo)
         {
@@ -160,11 +161,32 @@ namespace UnityLibrarySwitcher
                                  branch.Replace('/', '_'));
         }
 
+        private static string LibraryPath(CachedLibraryInfo info)
+        {
+            return LibraryPath(info.Branch, info.Target);
+        }
+
         private static string LibraryPath(string branch, BuildTarget target)
         {
             return string.Format("{0}/{1}",
                                  BranchPath(branch),
                                  target.ToString());
+        }
+
+        #endregion
+
+        #region Size calculation
+
+        public void StartSizeCalculations()
+        {
+            Debug.Log("StartSizeCalculations");
+            CachedLibraries.Values.ToList().ForEach(list => list.ForEach(info => info.CalculateSize()));
+        }
+
+        public void StopSizeCalculations()
+        {
+            Debug.Log("StopSizeCalculations");
+            CachedLibraries.Values.ToList().ForEach(list => list.ForEach(info => info.ResetSize()));
         }
 
         #endregion
