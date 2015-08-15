@@ -15,9 +15,7 @@ namespace UnityLibrarySwitcher
                 if (m_model == null)
                 {
                     m_model = new LibrarySwitcher();
-                    m_model.UpdateListOfBranches();
-                    m_model.UpdateCurrentBranchName();
-                    m_model.UpdateCachedLibrariesInfo();
+                    UpdateModel(m_model);
                 }
                 return m_model;
             }
@@ -29,6 +27,13 @@ namespace UnityLibrarySwitcher
         {
             var window = EditorWindow.GetWindow(typeof(LibrarySwitcherWindow));
             window.titleContent.text = "Library Switcher";
+        }
+
+        private static void UpdateModel(LibrarySwitcher model)
+        {
+            model.UpdateListOfBranches();
+            model.UpdateCurrentBranchName();
+            model.UpdateCachedLibrariesInfo();
         }
 
         private void OnGUI()
@@ -75,6 +80,13 @@ namespace UnityLibrarySwitcher
                                     GUILayout.Width(widths[2]));
                     GUILayout.EndHorizontal();
                 }
+            }
+
+            EditorGUILayout.Separator();
+
+            if (GUILayout.Button("Update"))
+            {
+                UpdateModel(_model);
             }
         }
 
