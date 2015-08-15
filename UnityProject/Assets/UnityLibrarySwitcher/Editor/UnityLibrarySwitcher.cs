@@ -112,7 +112,11 @@ namespace UnityLibrarySwitcher
             var libraryPathFrom = LibraryPath(CurrentBranchName, CurrentBuildTarget);
             var libraryPathTo = LibraryPath(CurrentBranchName, targetTo);
             SwitchLibrary(libraryPathFrom, libraryPathTo);
-            EditorUserBuildSettings.SwitchActiveBuildTarget(targetTo);
+            if (!EditorUserBuildSettings.SwitchActiveBuildTarget(targetTo))
+            {
+                Directory.Delete(libraryPathFrom, true);
+                UpdateCachedLibrariesInfo();
+            }
         }
 
         public void SwitchBranchTo(string branchTo)
