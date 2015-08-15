@@ -28,7 +28,6 @@ namespace UnityLibrarySwitcher
 
         public void CalculateSize()
         {
-            Size = 0;
             _calculateAsync = () => {
                 Size = DirSize(Path);
             };
@@ -44,20 +43,20 @@ namespace UnityLibrarySwitcher
 
         public static long DirSize(DirectoryInfo d)
         {
-            long Size = 0;
+            long size = 0;
             // Add file sizes.
             FileInfo[] fis = d.GetFiles();
             foreach (FileInfo fi in fis)
             {
-                Size += fi.Length;
+                size += fi.Length;
             }
             // Add subdirectory sizes.
             DirectoryInfo[] dis = d.GetDirectories();
             foreach (DirectoryInfo di in dis)
             {
-                Size += DirSize(di);
+                size += DirSize(di);
             }
-            return(Size);
+            return(size);
         }
     }
 }

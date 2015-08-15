@@ -90,7 +90,9 @@ namespace UnityLibrarySwitcher
                     {
                         var target = (BuildTarget) Enum.Parse(typeof(BuildTarget), targetInfo.Name);
                         var path = LibraryPath(branchInfo.Name, target);
-                        list.Add(new CachedLibraryInfo(branchInfo.Name, target, path));
+                        var info = new CachedLibraryInfo(branchInfo.Name, target, path);
+                        info.CalculateSize();
+                        list.Add(info);
                     }
                 }
                 m_cachedLibraries.Add(branchInfo.Name, list);
@@ -177,21 +179,6 @@ namespace UnityLibrarySwitcher
 
         #endregion
 
-        #region Size calculation
-
-        public void StartSizeCalculations()
-        {
-            Debug.Log("StartSizeCalculations");
-            CachedLibraries.Values.ToList().ForEach(list => list.ForEach(info => info.CalculateSize()));
-        }
-
-        public void StopSizeCalculations()
-        {
-            Debug.Log("StopSizeCalculations");
-            CachedLibraries.Values.ToList().ForEach(list => list.ForEach(info => info.ResetSize()));
-        }
-
-        #endregion
     }
 
 }
