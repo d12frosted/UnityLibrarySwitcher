@@ -41,3 +41,7 @@ Pull requests, feature requests are warmly welcome!
 ** Issues / Tasks
 
 Please, see [[https://github.com/d12frosted/UnityLibrarySwitcher/issues][Issues]] section.
+
+** More reading
+
+You can find more information about this project in [[http://d12frosted.github.io/posts/UnityLibrarySwitcher-v0.1.html][this blog post]].
