@@ -31,16 +31,6 @@ namespace UnityLibrarySwitcher
             window.titleContent.text = "Library Switcher";
         }
 
-        private void OnEnable()
-        {
-            _model.StartSizeCalculations();
-        }
-
-        private void OnDisable()
-        {
-            _model.StopSizeCalculations();
-        }
-
         private void OnGUI()
         {
             EditorGUILayout.Separator();
