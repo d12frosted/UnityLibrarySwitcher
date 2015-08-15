@@ -13,7 +13,7 @@ namespace UnityLibrarySwitcher
             {
                 throw new Exception("Couldn't get the list of branches with error message: " + result.StandartError);
             }
-            return result.StandartOutputLines.Select(x => x.Substring(2)).ToList();
+            return result.StandartOutputLines.Select(x => x.Substring(2).TrimEnd('\n', '\r')).ToList();
         }
 
         public static string GetCurrentBranch()

@@ -40,7 +40,7 @@ namespace UnityLibrarySwitcher
 
 #if UNITY_EDITOR_WIN
             var str = proc.StandardOutput.ReadToEnd().TrimEnd('\n', '\r');
-            var lines = str.Split(Environment.NewLine.ToCharArray()).Skip(5).ToArray();
+            var lines = Result.Lines(str).Skip(5).ToArray();
             var stdOut = string.Join(Environment.NewLine, lines);
             result.StandartOutput = stdOut;
 #endif
@@ -90,13 +90,13 @@ namespace UnityLibrarySwitcher
                 return string.Format("ExitCode({0}), output({1}), error({2})", ExitCode.ToString(), StandartOutput ?? "null", StandartError ?? "null");
             }
 
-            private static List<string> Lines(string value)
+            public static List<string> Lines(string value)
             {
                 if (string.IsNullOrEmpty(value))
                 {
                     return new List<string>();
                 }
-                return value.Split('\n').ToList();
+                return value.Split(new string[] { "\n", "\n\r" }, StringSplitOptions.None).ToList();
             }
         }
 
