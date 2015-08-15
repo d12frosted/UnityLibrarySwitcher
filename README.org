@@ -4,7 +4,7 @@ Unity Library Switcher is a Unity3d plugin for switching build targets and git b
 
 ** Install
 
-To install the plugin just copy =UnityLibrarySwitcher= folder to your project assets folder. Just don't forget to add this folder to =.gitignore= file. 
+To install the plugin just copy =src/UnityLibrarySwitcher/UnityLibrarySwitcher= folder to your project assets folder. Just don't forget to add this folder to =.gitignore= file. 
 
 ** How it works
 
