@@ -6,7 +6,13 @@ namespace UnityLibrarySwitcher
 {
     public class MonoBasher
     {
+#if UNITY_EDITOR_WIN
+        private static string ShellPath = @"C:\Program Files (x86)\Git\bin\sh";
+#endif
+
+#if UNITY_EDITOR_OSX
         private static string ShellPath = "/bin/bash";
+#endif
 
         public static Result ExecuteCommand(string command)
         {
@@ -17,13 +23,32 @@ namespace UnityLibrarySwitcher
         {
             var proc = new System.Diagnostics.Process();
             proc.StartInfo.FileName = ShellPath;
+
+#if UNITY_EDITOR_WIN
+            proc.StartInfo.Arguments = "--login -i -c \" " + command + " \"";
+#endif
+
+#if UNITY_EDITOR_OSX
             proc.StartInfo.Arguments = "-c \" " + command + " \"";
+#endif
+
             proc.StartInfo.UseShellExecute = false;
             proc.StartInfo.RedirectStandardOutput = true;
             proc.StartInfo.RedirectStandardError = true;
             proc.Start();
             var result = new Result();
+
+#if UNITY_EDITOR_WIN
+            var str = proc.StandardOutput.ReadToEnd().TrimEnd('\n', '\r');
+            var lines = str.Split(Environment.NewLine.ToCharArray()).Skip(5).ToArray();
+            var stdOut = string.Join(Environment.NewLine, lines);
+            result.StandartOutput = stdOut;
+#endif
+
+#if UNITY_EDITOR_OSX
             result.StandartOutput = proc.StandardOutput.ReadToEnd().TrimEnd('\n', '\r');
+#endif
+
             result.StandartError = proc.StandardError.ReadToEnd().TrimEnd('\n', '\r');
             proc.WaitForExit();
             result.ExitCode = proc.ExitCode;
