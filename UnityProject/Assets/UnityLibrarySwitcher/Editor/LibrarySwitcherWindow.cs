@@ -51,7 +51,7 @@ namespace UnityLibrarySwitcher
 
         private void OnGUICachedLibraries()
         {
-            var widths = new float[] { 0.42f, 0.26f, 0.24f }.Select(x => x * Screen.width).ToArray();
+            var widths = new float[] { 0.40f, 0.34f, 0.18f }.Select(x => x * Screen.width).ToArray();
             if (_model.CachedLibraries.Count > 0)
             {
                 EditorGUILayout.Separator();
