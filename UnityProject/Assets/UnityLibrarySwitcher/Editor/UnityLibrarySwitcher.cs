@@ -75,6 +75,8 @@ namespace UnityLibrarySwitcher
         {
             m_cachedLibraries = new Dictionary<string, List<CachedLibraryInfo>>();
 
+            SafeCreateDirectory(LibraryCacheDirectory);
+
             foreach (var branchInfo in new DirectoryInfo(LibraryCacheDirectory).GetDirectories())
             {
                 var list = new List<CachedLibraryInfo>();
